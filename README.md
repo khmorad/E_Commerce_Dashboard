@@ -26,12 +26,12 @@ In the expansive realm of online commerce, a wealth of valuable information is r
 | Date       | Description                                        | Progress     |
 |------------|----------------------------------------------------|--------------|
 | 10/25/2023 | Complete Project Proposal                          | Complete     |
-| 10/31/2023 | Import IPO data into Google Colab                  | Pending      |
-| 10/31/2023 | Determine focus data points                        | Not started  |
+| 10/31/2023 | Import IPO data into Google Colab                  | Complete     |
+| 10/31/2023 | Determine focus data points                        | Complete     |
 | 11/4/2023  | Conduct simple statistical analysis                | Not started  |
-| 11/13/2023 | Create visualizations with Matplotlib, Seaborn     | Not started  |
-| 11/18/2023 | Implement dashboard software                       | Not started  |
-| 11/21/2023 | Create presentation slides                          | Not started  |
+| 11/13/2023 | Create visualizations with Matplotlib, Seaborn     | Complete     |
+| 11/18/2023 | Implement dashboard software                       | Complete     |
+| 11/21/2023 | Create presentation slides                         | Not started  |
 
 
 
