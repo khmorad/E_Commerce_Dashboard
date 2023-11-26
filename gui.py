@@ -15,9 +15,7 @@ from data import process_walmart_data_by_keyword
 
 df = pd.read_csv("walmart_data.csv")
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(
-    r"C:\Users\khakh\projects\E_Commerce_data_Analysis_Dashboard\build\assets\frame0"
-)
+ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame0")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -59,7 +57,7 @@ def create_matplotlib_plots():
     canvas1 = FigureCanvasTkAgg(fig1, master=window)
     canvas1.draw()
     # Get the dimensions of the rectangle for line plot placement
-    line_rect_x1, line_rect_y1, line_rect_x2, line_rect_y2 = 316.0, 148.0, 529.0, 322.0
+    line_rect_x1, line_rect_y1, line_rect_x2, line_rect_y2 = 316.0, 148.0, 529.0, 332.0
 
     # Calculate the width and height of the line plot rectangle
     line_rect_width = line_rect_x2 - line_rect_x1
@@ -119,7 +117,7 @@ def create_matplotlib_plots():
     canvas2.draw()
 
     # Get the dimensions of the rectangle for bar plot placement
-    bar_rect_x1, bar_rect_y1, bar_rect_x2, bar_rect_y2 = 553.0, 149.0, 969.0, 322.0
+    bar_rect_x1, bar_rect_y1, bar_rect_x2, bar_rect_y2 = 553.0, 149.0, 969.0, 332.0
     bar_rect_width = bar_rect_x2 - bar_rect_x1
     bar_rect_height = bar_rect_y2 - bar_rect_y1
 
@@ -278,7 +276,7 @@ canvas.create_text(
     font=("Righteous Regular", 22 * -1),
 )
 
-canvas.create_rectangle(318.0, 150.0, 531.0, 324.0, fill="#C9C9C9", outline="")
+canvas.create_rectangle(318.0, 150.0, 531.0, 334.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(320.0, 352.0, 533.0, 526.0, fill="#C9C9C9", outline="")
 
@@ -286,7 +284,7 @@ canvas.create_rectangle(557.0, 350.0, 746.0, 524.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(780.0, 349.0, 969.0, 523.0, fill="#C9C9C9", outline="")
 
-canvas.create_rectangle(316.0, 148.0, 529.0, 322.0, fill="#F9F9F9", outline="")
+canvas.create_rectangle(316.0, 148.0, 529.0, 332.0, fill="#F9F9F9", outline="")
 
 canvas.create_rectangle(320.0, 351.0, 533.0, 525.0, fill="#C9C9C9", outline="")
 
@@ -306,9 +304,9 @@ canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")
 
 canvas.create_rectangle(778.0, 347.0, 967.0, 521.0, fill="#F9F9F9", outline="")
 
-canvas.create_rectangle(555.0, 151.0, 971.0, 324.0, fill="#C2C2C2", outline="")
+canvas.create_rectangle(555.0, 151.0, 971.0, 334.0, fill="#C2C2C2", outline="")
 
-canvas.create_rectangle(553.0, 149.0, 969.0, 322.0, fill="#F9F9F9", outline="")
+canvas.create_rectangle(553.0, 149.0, 969.0, 332.0, fill="#F9F9F9", outline="")
 
 button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
 button_1 = Button(
