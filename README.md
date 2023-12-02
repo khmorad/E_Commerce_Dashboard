@@ -17,7 +17,7 @@ In the expansive realm of online commerce, a wealth of valuable information is r
 
 - **Code**: Python for its versatility and robust development platform.
 - **Libraries**: Pandas, Numpy, Matplotlib, Seaborn for data manipulation and visualization.
-- **Development Environment**: Google Colab for seamless collaboration.
+- **Development Environment**: Google Colab and VS Code for seamless collaboration.
 - **Data Retrieval**: Axesso API to access necessary data.
 - **Analysis Techniques**: Descriptive statistics and clustering algorithms.
 
