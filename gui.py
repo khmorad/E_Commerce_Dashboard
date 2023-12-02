@@ -58,9 +58,9 @@ def create_matplotlib_plots():
         ax=ax_heatmap,
         annot_kws={"size": 7},
     )
-    plt.title("Correlation Matrix Heatmap", fontsize=10)
-    ax_heatmap.xaxis.label.set_size(7)
-    ax_heatmap.yaxis.label.set_size(7)
+    plt.title("Correlation Matrix Heatmap", fontsize=9)
+    ax_heatmap.tick_params(axis="x", labelsize=6)  # Set font size for x-axis ticks
+    ax_heatmap.tick_params(axis="y", labelsize=6)  # Set font size for y-axis ticks
 
     # Adjust layout to give more space for labels
 
@@ -104,10 +104,12 @@ def create_matplotlib_plots():
         topAvgPriceBar.values,
         color="lightblue",
     )
-    ax2.set_xlabel("Seller Name")
+    ax2.set_xlabel("Seller Name", fontsize=7)
     ax2.set_ylabel("Average Price")
-    ax2.set_title("Top 10 Average Prices Based on Seller")
+    ax2.set_title("Top 10 Average Prices Based on Seller", fontsize=10)
     ax2.set_facecolor("#FAFAFA")
+    ax2.tick_params(axis="x", labelsize=8)  # Set font size for x-axis ticks
+    ax2.tick_params(axis="y", labelsize=8)  # Set font size for y-axis ticks
 
     def bar_label(sel):
         ind = sel.target.index
@@ -136,8 +138,6 @@ def create_matplotlib_plots():
     bar_plot_widget.place(
         x=bar_rect_x1, y=bar_rect_y1, width=bar_rect_width, height=bar_rect_height
     )
-    avgPriceBar = df.groupby("seller_name")["item_price"].mean()
-    topAvgPriceBar = avgPriceBar.sort_values(ascending=False).head(10)  # Select top 5
 
     # Create a pie chart for the top 5 average prices based on sellers
     fig_pie, ax_pie = plt.subplots(figsize=(4, 4))
@@ -154,7 +154,9 @@ def create_matplotlib_plots():
         textprops={"fontsize": 5.2},
     )
     ax_pie.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle
-    ax_pie.set_title("Avg Prices by Seller")  # Set the title for the pie chart
+    ax_pie.set_title(
+        "Avg Prices by Seller", fontsize=10
+    )  # Set the title for the pie chart
 
     # Convert Matplotlib pie chart to Tkinter-compatible canvas
     canvas_pie = FigureCanvasTkAgg(fig_pie, master=window)
@@ -173,12 +175,14 @@ def create_matplotlib_plots():
         x=pie_rect_x1, y=pie_rect_y1, width=pie_rect_width, height=pie_rect_height
     )
     # Create a sample scatter plot
-    fig_scatter, ax_scatter = plt.subplots(figsize=(4, 4))
+    fig_scatter, ax_scatter = plt.subplots(figsize=(1, 1))
     ax_scatter.scatter(df["item_price"], df["reviews"])  # Sample scatter plot
     ax_scatter.set_xlabel("X-axis")
     ax_scatter.set_ylabel("Y-axis")
-    ax_scatter.set_title("Sample Scatter Plot")
+    ax_scatter.set_title("Price V. Number of Reviews", fontsize=9)
     ax_scatter.set_facecolor("#FAFAFA")  # Set plot background color
+    ax_scatter.tick_params(axis="x", labelsize=7)  # Set font size for x-axis ticks
+    ax_scatter.tick_params(axis="y", labelsize=6)  # Set font size for y-axis ticks
 
     # Convert Matplotlib scatter plot to Tkinter-compatible canvas
     canvas_scatter = FigureCanvasTkAgg(fig_scatter, master=window)
@@ -210,7 +214,7 @@ def create_matplotlib_plots():
 
     fig_boxplot, ax_boxplot = plt.subplots(figsize=(4, 4))
     sns.boxplot(x="seller_name", y="item_price", data=df_top_sellers, ax=ax_boxplot)
-    plt.title("Prices for Top 3 Sellers")
+    plt.title("Prices for Top 3 Sellers", fontsize=10)
     ax_boxplot.set_xlabel("Seller Name")
     ax_boxplot.set_ylabel("Item Price")
     ax_boxplot.set_facecolor("#FAFAFA")  # Set plot background color
@@ -251,27 +255,39 @@ def create_matplotlib_plots():
 
     # Mapping company names to c1, c2, c3
     company_mapping = {company: f"c{i + 1}" for i, company in enumerate(top_sellers)}
+    ax_boxplot.tick_params(axis="x", labelsize=8)  # Set font size for x-axis ticks
+    ax_boxplot.tick_params(axis="y", labelsize=8)  # Set font size for y-axis ticks
 
-    def bar_label(sel):
-        ind = sel.target.index
-        if ind < len(top_sellers):
+
+def bax_label(sel):
+    ind = sel.target.index
+    if ind < len(top_sellers):
+        if isinstance(
+            sel.artist, plt.Line2D
+        ):  # For Line2D objects (e.g., scatter plot)
+            x_data = sel.artist.get_xdata()
+            y_data = sel.artist.get_ydata()
+            x_val = x_data[ind]
+            y_val = y_data[ind]
+            sel.annotation.set_text(f"X: {x_val}, Y: {y_val}")
+        else:  # For BarContainer objects (e.g., bar plot)
             seller_name = top_sellers[ind]
             c_name = company_mapping[seller_name]
             sel.annotation.set_text(
-                f"{bars[ind].get_height()} - {c_name} ({seller_name})"
+                f"{topAvgPriceBar.values[ind]} - {c_name} ({seller_name})"
             )
-            sel.annotation.get_bbox_patch().set(fc="white", alpha=1.0)
-            sel.annotation.get_bbox_patch().set(edgecolor="black", linewidth=1)
+        sel.annotation.get_bbox_patch().set(fc="white", alpha=1.0)
+        sel.annotation.get_bbox_patch().set(edgecolor="black", linewidth=1)
 
-            def on_leave(event):
-                sel.annotation.set_visible(False)
-                canvas_boxplot.draw()
+        def on_leave(event):
+            sel.annotation.set_visible(False)
+            canvas_boxplot.draw()
 
-            canvas_boxplot.mpl_connect("axes_leave_event", on_leave)
+        canvas_boxplot.mpl_connect("axes_leave_event", on_leave)
 
     bars = ax_boxplot.get_children()[1:]  # Get the bars in the boxplot
 
-    mplcursors.cursor(bars, hover=True).connect("add", bar_label)
+    mplcursors.cursor(bars, hover=True).connect("add", bax_label)
 
 
 def display_dataframe(window, dataframe, x1, y1, x2, y2):
