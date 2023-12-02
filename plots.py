@@ -10,56 +10,6 @@ import pandas as pd
 from data import process_walmart_data_by_keyword
 import seaborn as sns
 
-df = pd.read_csv("walmart_data.csv")
-OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame0")
-
-
-def relative_to_assets(path: str) -> Path:
-    return ASSETS_PATH / Path(path)
-
-
-window = tk.Tk()
-window.title("E-Commerence DataAnalysis Dashboard")
-window.geometry("999x551")
-window.configure(bg="#FFFFFF")
-
-
-canvas = Canvas(
-    window,
-    bg="#FFFFFF",
-    height=551,
-    width=999,
-    bd=0,
-    highlightthickness=0,
-    relief="ridge",
-)
-canvas.pack()
-
-
-# this works i just dont want to waste api calls
-##def print_entry_content():
-##    content = entry_1.get()  # Get the text from entry_1
-##
-##    # Assuming process_walmart_data_by_keyword takes the entered item name as an argument
-##    new_df = process_walmart_data_by_keyword(
-##        content
-##    )  # Get new data based on the item name
-##
-##    # Update the global DataFrame 'df' with the new data
-##    global df
-##    df = new_df
-##
-##    # Recreate the entire plotting
-##    create_matplotlib_plots()
-##
-##    print("Entry Content:", content)
-
-
-def print_entry_content():
-    content = entry_1.get()  # Get the text from entry_1
-    print("Entry Content:", content)
-
 
 def create_matplotlib_plots():
     selected_columns = ["item_price", "avg_rating", "reviews"]
@@ -198,7 +148,7 @@ def create_matplotlib_plots():
     ax_scatter.scatter(df["item_price"], df["reviews"])  # Sample scatter plot
     ax_scatter.set_xlabel("X-axis")
     ax_scatter.set_ylabel("Y-axis")
-    ax_scatter.set_title("Price Vs Number of Reviews", fontsize=9)
+    ax_scatter.set_title("Price V. Number of Reviews", fontsize=9)
     ax_scatter.set_facecolor("#FAFAFA")  # Set plot background color
     ax_scatter.tick_params(axis="x", labelsize=7)  # Set font size for x-axis ticks
     ax_scatter.tick_params(axis="y", labelsize=6)  # Set font size for y-axis ticks
@@ -307,108 +257,3 @@ def bax_label(sel):
     bars = ax_boxplot.get_children()[1:]  # Get the bars in the boxplot
 
     mplcursors.cursor(bars, hover=True).connect("add", bax_label)
-
-
-def display_dataframe(window, dataframe, x1, y1, x2, y2):
-    frame = ttk.Frame(window)
-    frame.place(x=x1, y=y1, width=(x2 - x1), height=(y2 - y1))
-
-    tree = ttk.Treeview(frame)
-
-    # Get column names including the index
-    columns = list(dataframe.columns)
-
-    # Rename the index column
-    tree["columns"] = columns[1:]
-
-    # Set headings for columns and adjust column widths
-    for col in columns[1:]:
-        tree.heading(col, text=col)
-        tree.column(col, width=52)  # Set the width as desired, e.g., 100 pixels
-    # Set width for the first column (index column)
-    tree.column("#0", width=0)  # Set the width as desired
-    # Insert data rows into the treeview
-    for idx, row in dataframe.iterrows():
-        values = list(row)[1:]  # Exclude the index value in each row
-        tree.insert("", "end", text=idx, values=values)  # Provide the index value here
-
-    tree.pack(fill="both", expand=True)
-
-
-canvas.place(x=0, y=0)
-canvas.create_rectangle(2.0, 46.0, 267.0, 551.0, fill="#C9C9C9", outline="")
-
-canvas.create_rectangle(1.0, 47.0, 266.0, 552.0, fill="#F9F9F9", outline="")
-
-canvas.create_rectangle(0.0, 3.0, 999.0, 49.0, fill="#F0F0F0", outline="")
-
-entry_image_1 = PhotoImage(file=relative_to_assets("entry_1.png"))
-entry_bg_1 = canvas.create_image(543.5, 98.5, image=entry_image_1)
-entry_1 = Entry(bd=0, bg="#D1F1EB", fg="#000716", highlightthickness=0)
-entry_1.place(x=319.0, y=83.0, width=449.0, height=29.0)
-
-canvas.create_rectangle(0.0, 0.0, 999.0, 46.0, fill="#38BBD8", outline="")
-
-canvas.create_rectangle(9.0, 4.0, 58.0, 43.0, fill="#FFEBCD", outline="")
-
-image_image_1 = PhotoImage(file=relative_to_assets("image_1.png"))
-image_1 = canvas.create_image(33.0, 23.0, image=image_image_1)
-
-canvas.create_text(
-    72.0,
-    11.0,
-    anchor="nw",
-    text="E-Commerence DataAnalysis Dashboard\n",
-    fill="#21272A",
-    font=("Righteous Regular", 22 * -1),
-)
-
-canvas.create_rectangle(318.0, 150.0, 531.0, 334.0, fill="#C9C9C9", outline="")
-
-canvas.create_rectangle(320.0, 352.0, 533.0, 526.0, fill="#C9C9C9", outline="")
-
-canvas.create_rectangle(557.0, 350.0, 746.0, 524.0, fill="#C9C9C9", outline="")
-
-canvas.create_rectangle(780.0, 349.0, 969.0, 523.0, fill="#C9C9C9", outline="")
-
-canvas.create_rectangle(316.0, 148.0, 529.0, 332.0, fill="#F9F9F9", outline="")
-
-canvas.create_rectangle(320.0, 351.0, 533.0, 525.0, fill="#C9C9C9", outline="")
-
-canvas.create_rectangle(557.0, 349.0, 746.0, 523.0, fill="#C9C9C9", outline="")
-
-canvas.create_rectangle(780.0, 348.0, 969.0, 522.0, fill="#C9C9C9", outline="")
-
-canvas.create_rectangle(318.0, 350.0, 531.0, 524.0, fill="#F9F9F9", outline="")
-
-canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")
-
-canvas.create_rectangle(778.0, 347.0, 967.0, 521.0, fill="#F9F9F9", outline="")
-
-canvas.create_rectangle(318.0, 350.0, 531.0, 524.0, fill="#F9F9F9", outline="")
-
-canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")
-
-canvas.create_rectangle(778.0, 347.0, 967.0, 521.0, fill="#F9F9F9", outline="")
-
-canvas.create_rectangle(555.0, 151.0, 971.0, 334.0, fill="#C2C2C2", outline="")
-
-canvas.create_rectangle(553.0, 149.0, 969.0, 332.0, fill="#F9F9F9", outline="")
-
-button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
-button_1 = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=print_entry_content,
-    relief="flat",
-)
-button_1.place(x=777.0, y=83.0, width=56.0, height=31.0)
-window.resizable(False, False)
-create_matplotlib_plots()
-
-
-# Adjust the rectangle dimensions to fit your desired location
-display_dataframe(window, df, 2.0, 47.0, 266.0, 552.0)
-
-window.mainloop()
