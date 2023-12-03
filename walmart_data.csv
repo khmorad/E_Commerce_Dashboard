@@ -1,41 +1,49 @@
 id,seller_name,item_price,Item_line_price,availability,avg_rating,reviews,item_name
-423327139,Walmart.com,7,$7.49,True,4,57,Girl in Pieces (Paperback)
-425060443,SHOPPINGSS,7,$7.34,True,4,116,It Starts with Us : A Novel (Paperback)
-910093951,Walmart.com,10,$10.59,True,4,33,Twisted: Twisted Love (Paperback)
-50552397,SHOPPINGSS,7,$7.48,True,4,171,It Ends with Us: It Ends with Us (Series #1) (Paperback)
-209173710,Book Outlet USA,6,$6.99,True,4,101,Verity (Paperback)
-33937525,Easystreet Hangout,9,$9.78,True,4,123,Ugly Love: A Novel
-1738959383,Book Outlet USA,6,$6.99,True,4,51,The Housemaid (Paperback)
-113612313,Walmart.com,11,$11.20,True,4,15,Knockemout: Things We Never Got Over (Series #1) (Paperback)
-969881354,VIPOUTLET,49,$49.00,True,4,22,"Shatter Me: Shatter Me Series 6-Book Box Set: Shatter Me, Unravel Me, Ignite Me, Restore Me, Defy Me, Imagine Me (Paperback)"
-559740056,Walmart.com,10,$10.69,True,4,17,Never After: Hooked (Paperback)
-1865552154,Walmart.com,16,$16.99,True,4,322,The Empyrean: Fourth Wing (Series #1) (Hardcover)
-676599252,Walmart.com,10,$10.53,True,4,148,The Silent Patient (Paperback)
-1674652123,Walmart.com,10,$10.96,True,5,3,Meet Me at the Lake (Paperback)
-766479071,Walmart.com,10,$10.37,True,4,150,A Court of Thorns and Roses: A Court of Thorns and Roses (Series #1) (Paperback)
-2153291790,Walmart.com,11,$11.32,True,4,35,The Maple Hills Series: Icebreaker : A Novel (Series #1) (Paperback)
-647509825,Walmart.com,8,$8.97,True,4,6,You'd Be Home Now (Paperback)
-1628464804,Walmart.com,10,$10.50,True,4,13,Kings of Sin: King of Wrath (Paperback)
-861517352,Walmart.com,10,$10.70,True,4,16,The Love Hypothesis (Paperback)
-29454736,Walmart.com,23,$23.02,False,4,143,Disney-Hyperion Percy Jackson and the Olympians 5 Book (Paperback)
-703412326,Walmart.com,13,$13.79,True,4,85,Atomic Habits : An Easy & Proven Way to Build Good Habits & Break Bad Ones (Hardcover)
-640011425,Walmart.com,5,$5.37,True,5,77,Punderland: I Love You Like No Otter (Board Book)
-1620301596,Walmart.com,9,$9.99,True,5,1,A Flicker in the Dark : A Novel (Paperback)
-129574310,Walmart.com,15,$15.97,True,4,37,Pinkfong Baby Shark Sing-Alongs Sound Book (Walmart Exclusive)
-1870194765,Walmart.com,11,$11.66,True,4,11,Knockemout: Things We Hide from the Light (Series #2) (Paperback)
-56195455,Walmart.com,11,$11.44,True,4,32,Archer's Voice (Paperback)
-108210249,Walmart.com,7,$7.18,True,4,105,Disney Bedtime Favorites Storybook Collection (Walmart Exclusive) (Hardcover)
-905287164,Walmart.com,9,$9.62,True,4,5,The Things We Leave Unfinished (Paperback)
-512986179,Walmart.com,10,$10.21,True,4,34,Twisted: Twisted Games (Paperback)
-293238829,Walmart.com,10,$10.51,True,4,16,Dreamland Billionaires: Terms and Conditions (Paperback)
-1475679994,Walmart.com,12,$12.78,True,4,3,Small Victories : A Coloring Book of Little Wins and Miniature Masterpieces (Paperback)
-682321455,Ambis Enterprises LLC,14,$14.59,True,4,19,Twisted: Twisted Hate (Paperback)
-497092277,Walmart.com,9,$9.50,True,5,2,Every Summer After (Paperback)
-1564922403,Walmart.com,9,$9.74,True,3,3,ONE OF US IS LYING: One of Us Is Lying (Paperback)
-46509026,BooksXpress,11,$11.68,True,3,69,Milk and Honey
-20467684,Walmart.com,9,$9.59,True,3,186,Shatter Me: Shatter Me (Paperback)
-293384992,Walmart.com,13,$13.48,True,3,15,Dreamland Billionaires: The Fine Print (Paperback)
-1246268985,Walmart.com,10,$10.78,True,4,14,Dreamland Billionaires: Final Offer (Paperback)
-832671286,Walmart.com,12,$12.74,True,4,10,Book Lovers (Paperback)
-43379756,Ambis Enterprises LLC,12,$12.46,True,4,58,Burn After Writing
-325440655,SHOPPINGSS,10,$10.20,True,4,16,Twisted: Twisted Lies (Paperback)
+47461538,Walmart.com,15,$15.36,True,4,234,Yeti in My Spaghetti by PlayMonster - Award Winning - Silly Children's Game
+30579775,Walmart.com,22,$22.40,True,4,12,"Learning Resources Dino Math Tracks Game - Boys and Girls Ages 6+ Dinosaur Game, Kindergarten Math Games, Board Games for Kids"
+16609511,Walmart.com,16,$16.22,True,4,55,Learning Resources Avalanche Fruit Stand Fine Motor Grip Game 42 Piece Set Ages 3
+2244337048,The Dusty Tophat LTD,27,$27.99,True,0,0,Ultimate Aquarium - An Easy and Strategic Aquarium Building Card Game for All Ages; 2-4 Players
+740300238,Walmart.com,8,$8.99,True,4,1104,"Connect 4 Classic Grid Board Game, 4 in a Row Game for Kids, 2 Player Strategy Board Games, Ages 6+"
+298923226,Walmart.com,9,$9.97,True,4,739,"Sorry! Kids Board Game, Family Board Games for Kids, 2 to 4 Players, Ages 6+"
+334768093,Walmart.com,9,$9.97,True,4,927,"Hasbro Trouble Board Game, Board Game for 2 to 4 Players, for Kids Ages 5 and Up"
+878142,Walmart.com,4,$4.97,True,4,2206,"UNO Card Game for Kids, Adults & Game Night, Original Game of Matching Colors & Numbers"
+498560962,Walmart.com,7,$7.97,True,4,1389,"Candy Land Preschool Board Game, No Reading Required For Young Children"
+959078122,Walmart.com,15,$15.00,True,4,54,"Tell Me Without Telling Me, Party Card Game, for Adults Ages 18 and up"
+2783156968,Walmart.com,14,$14.97,True,4,286,"Twister Air Game, AR Twister App Play Game, Links to Smart Devices, Active Games, Ages 8+"
+193491077,"Gatwick Games, LLC",28,$28.99,True,4,4,Gatwick Games It's in The Bag! - The Quick Witted Party Game
+51404444,Walmart.com,15,$15.50,True,4,1273,"Classic Family Favorite Operation Game, Board Game for Kids Ages 6 and Up"
+22223365,Walmart.com,9,$9.97,True,4,1482,"Classic Jenga Game with Genuine Hardwood Blocks, Jenga Brand Stacking Tower Game for Kids Ages 6 and Up"
+315829707,Walmart.com,14,$14.97,True,4,170,"The #UpsideDownChallege Game, Hilarious Party Game for Kids and Family, 2+ Players""."
+50998213,Walmart.com,9,$9.97,True,4,774,"Clue Board Game, Mystery Game for Kids Ages 8 and Up, Family Games for 2-6 Players"
+1698519515,Walmart.com,14,$14.99,True,4,545,"UNO Quatro Game, Adult, Family & Game Night with Colored Tiles & Plastic Game Grid, 2 to 4 Players"
+401876125,Walmart.com,14,$14.97,True,4,157,"Tapple Word Game by USAopoly, Fast-Paced Family Board Game, 2 - 8 Players Ages 8 and up"
+1521732508,Walmart.com,15,$15.00,True,4,18,If You Know You Know IYKYK- The Question Card Party Game for Adults
+355963393,Walmart.com,9,$9.84,True,4,72,"Simon Micro Series Electronic Game, Classic Simon Gameplay in a Compact Size"
+286601681,"Gatwick Games, LLC",21,$21.99,True,4,2,"Goat Lords by Gatwick Games | Hilarious, Addictive & Competitive Card Game with Goats! | Best Card Games for Families, Adults, Teens, and Kids | Great Game Gift and Travel Games | 2-6 Players"
+1041805669,Zong Shang Co. Ltd,17,$17.99,True,0,0,"DEWEL Stacking Cups Game, 12pcs Cup Stacking Set, Sport Stacking Cups, Classic Stacking Play Toy, Family Game, Great Birthday Christmas Gift for Ages 3+ Kids Toddles(Purple)"
+867317487,Walmart.com,15,$15.00,True,4,78,Heads Up! Party Game 4th Edition
+55700105,Walmart.com,6,$6.44,True,4,90,Pressman Charades for Kids Game - Travel Version - 'No Reading Required' Family Game
+39250455,Walmart.com,5,$5.44,True,4,172,UNO Dare Card Game for Family Night Featuring Challenging and Silly Dares From 3 Categories
+481673932,Walmart.com,7,$7.97,True,4,93,"Chutes and Ladders Board Game, Classic Chutes and Ladders Gameplay"
+17325824,Walmart.com,5,$5.97,True,4,489,"Phase 10 Card Game, Family Game for Adults & Kids, Challenging & Exciting Rummy-style Play"
+715072886,Walmart.com,5,$5.95,True,4,37,Tangled Twistmas Card Game
+104383323,Walmart.com,10,$10.99,True,4,189,"Stinky Pig Party Game by Playmonster - Poke Him, Pass Him, He Toots!!"
+45160361,Walmart.com,8,$8.88,True,4,746,"YAHTZEE Classic, Game for Kids Ages 8+, for 2+ Players, Includes Shaker and Dice"
+395916943,Walmart.com,9,$9.84,True,4,123,Dolphin Hat Taco Cat Goat Cheese Pizza Card Game
+894807,Walmart.com,14,$14.97,True,4,396,"KerPlunk Kids Game, Family Game for Kids & Adults with Simple Rules for 2-4 Players"
+578132476,Walmart.com,6,$6.97,True,4,435,"Pressman Let's Go Fishin' - Under the Sea, Kids & Family Game"
+19857820,Walmart.com,5,$5.59,True,4,131,FARKLE Cup Dice Rolling Game
+32404780,Walmart.com,7,$7.97,True,4,446,"Classic Hi Ho Cherry-O Kids Board Game, for Preschoolers Ages 3 and up"
+192563010,Walmart.com,5,$5.00,True,4,518,"Gone Fishin Game, Fun Fishing Board Game for Kids Ages 4 and up"
+823993105,Walmart.com,14,$14.88,True,4,970,"Bop It! Marvel Spider-Man Edition Family Party Game for Kids and Adults, 1+ Players"
+626730108,Walmart.com,5,$5.97,True,4,68,"Ready Set Discover Bingo Game for Kids Ages 3 and Up, Game for 2-4 Players"
+950598250,Walmart.com,14,$14.87,True,4,114,"The Game of Life Game, Family Board Game, For Ages 8+, Pegs Come In 6 Colors"
+570740805,Walmart.com,5,$5.00,True,4,457,"Dino Dive Fishing Game, Fun Prehistoric Dinosaur Toy Activity for Family Game Night, for Young Kids Ages 4 and up"
+45924106,Walmart.com,3,$3.97,True,4,199,"Yahtzee Game Score Pad, Includes 80 Score Cards"
+517230221,Walmart.com,12,$12.99,True,4,210,"Hasbro Gaming Bop It! Electronic Game for Kids Ages 8 & Up, Brown/a"
+282559812,Walmart.com,14,$14.96,True,4,55,Tetris Strategy Board Game by Buffalo Games
+930082490,Walmart.com,14,$14.97,True,4,124,"Battleship Classic Board Game, Strategy Game For Kids Ages 7 and Up, Fun Kids Game For 2 Players"
+782363333,Walmart.com,14,$14.37,True,4,216,What Do You Meme? Family Edition - The Hilarious Family Card Game for Meme Lovers
+1559201719,Walmart.com,15,$15.54,True,4,9,"Taboo Classic Word Guessing Board Game for Adults and Teens, for 4+ Players, 13+"
+999958759,TY SALES,31,$31.99,True,4,1539,Monopoly Super Mario Celebration Edition Board Game for Kids Ages 8 and Up
+54017701,CYBER BOSS Inc,12,$12.73,True,4,65,"Red Light Green Light, 1-2-3 the Fast and Fun Card Game, Children Ages 5+"

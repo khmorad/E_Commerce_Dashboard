@@ -37,6 +37,8 @@ canvas = Canvas(
 canvas.pack()
 
 
+# this is the function that make the search button work
+# which will run the create_matplotlib_plots function again to update the plots
 # this works i just dont want to waste api calls
 def print_entry_content():
     content = entry_1.get()  # Get the text from entry_1
@@ -74,8 +76,9 @@ def create_matplotlib_plots():
         annot_kws={"size": 7},
     )
     plt.title("Correlation Matrix Heatmap", fontsize=9)
-    ax_heatmap.tick_params(axis="x", labelsize=6)  # Set font size for x-axis ticks
-    ax_heatmap.tick_params(axis="y", labelsize=6)  # Set font size for y-axis ticks
+    # using .tick_params to make the font of x and y axist to appropriate size
+    ax_heatmap.tick_params(axis="x", labelsize=6)
+    ax_heatmap.tick_params(axis="y", labelsize=6)
 
     # Adjust layout to give more space for labels
 
@@ -125,8 +128,9 @@ def create_matplotlib_plots():
     ax2.set_ylabel("Average Price")
     ax2.set_title("Top 10 Average Prices Based on Seller", fontsize=10)
     ax2.set_facecolor("#FAFAFA")
-    ax2.tick_params(axis="x", labelsize=8)  # Set font size for x-axis ticks
-    ax2.tick_params(axis="y", labelsize=8)  # Set font size for y-axis ticks
+    # using .tick_params to make the font of x and y axist to appropriate size
+    ax2.tick_params(axis="x", labelsize=8)
+    ax2.tick_params(axis="y", labelsize=8)
 
     def bar_label(sel):
         ind = sel.target.index
@@ -141,7 +145,9 @@ def create_matplotlib_plots():
                 canvas2.draw()
 
             canvas2.mpl_connect("axes_leave_event", on_leave)
-
+    # using mplcursors library so i can make the bar plot more interactive
+    # .curson method and .add method so trigger the bar_label function onece the
+    # mouse is hover over the bar
     mplcursors.cursor(bars, hover=True).connect("add", bar_label)
 
     canvas2 = FigureCanvasTkAgg(fig2, master=window)
@@ -170,10 +176,11 @@ def create_matplotlib_plots():
         startangle=140,
         textprops={"fontsize": 5.2},
     )
-    ax_pie.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle
-    ax_pie.set_title(
-        "Avg Prices by Seller", fontsize=10
-    )  # Set the title for the pie chart
+    # Equal aspect ratio ensures that pie is drawn as a circle
+    ax_pie.axis("equal")  
+    # Set the title for the pie chart and change the font size to 10 so it would fit the
+    # rectangle for the graph
+    ax_pie.set_title("Avg Prices by Seller", fontsize=10)
 
     # Convert Matplotlib pie chart to Tkinter-compatible canvas
     canvas_pie = FigureCanvasTkAgg(fig_pie, master=window)
@@ -186,7 +193,8 @@ def create_matplotlib_plots():
     pie_rect_width = pie_rect_x2 - pie_rect_x1
     pie_rect_height = pie_rect_y2 - pie_rect_y1
 
-    # Embed the pie chart within the tkinter canvas (place it within the desired rectangle)
+    # Now use the calculated width and height to
+    # Embed the pie chart within the tkinter canvas
     pie_chart_widget = canvas_pie.get_tk_widget()
     pie_chart_widget.place(
         x=pie_rect_x1, y=pie_rect_y1, width=pie_rect_width, height=pie_rect_height
@@ -197,9 +205,12 @@ def create_matplotlib_plots():
     ax_scatter.set_xlabel("X-axis")
     ax_scatter.set_ylabel("Y-axis")
     ax_scatter.set_title("Price Vs Number of Reviews", fontsize=9)
+    # using setfacecolor to make the plot match the background color of the window
+    # which is failing miserablely :(
     ax_scatter.set_facecolor("#FAFAFA")  # Set plot background color
-    ax_scatter.tick_params(axis="x", labelsize=7)  # Set font size for x-axis ticks
-    ax_scatter.tick_params(axis="y", labelsize=6)  # Set font size for y-axis ticks
+    # using .tick_params to make the font of x and y axist to appropriate size
+    ax_scatter.tick_params(axis="x", labelsize=7)
+    ax_scatter.tick_params(axis="y", labelsize=6)
 
     # Convert Matplotlib scatter plot to Tkinter-compatible canvas
     canvas_scatter = FigureCanvasTkAgg(fig_scatter, master=window)
@@ -322,6 +333,7 @@ canvas.create_text(
 )
 
 
+# all the rectangles created to create a dashboard
 canvas.create_rectangle(320.0, 352.0, 533.0, 526.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(557.0, 350.0, 746.0, 524.0, fill="#C9C9C9", outline="")
