@@ -20,10 +20,14 @@ def fetch_walmart_data_by_keyword(keyword):
         return None
 
 
-def extract_walmart_data(json_data):
-    data = json_data["item"]["props"]["pageProps"]["initialData"]["searchResult"][
+# method used to extract the data from a large json file containing more than 1000
+# of items
+def extract_data(json_items):
+    data = json_items["item"]["props"]["pageProps"]["initialData"]["searchResult"][
         "itemStacks"
     ]
+    # defining a dictionary where each value contains
+    # empty list
     item_data = {
         "id": [],
         "seller_name": [],
@@ -51,10 +55,15 @@ def extract_walmart_data(json_data):
     return pd.DataFrame(item_data)
 
 
-def process_walmart_data_by_keyword(keyword):
-    walmart_json_data = fetch_walmart_data_by_keyword(keyword)
+# this is the main function which uses the other function in this file which is being used in gui.py
+# using this function to which uses fetch_walmart_data_by_keyword and extract_walmart_data to get the data and save
+# to a csv file "walmarrt_data.csv"
+def process_walmart_data_by_keyword(item_keyword):
+    walmart_json_data = fetch_walmart_data_by_keyword(item_keyword)
+    # when data is retreived successfully extract the data  using extract_data() method
+    # and save to a csv file
     if walmart_json_data:
-        walmart_df = extract_walmart_data(walmart_json_data)
+        walmart_df = extract_data(walmart_json_data)
         walmart_df.to_csv("walmart_data.csv", index=False)
         return walmart_df
     else:
