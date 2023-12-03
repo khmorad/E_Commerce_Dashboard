@@ -81,13 +81,14 @@ def create_matplotlib_plots():
     )
     plt.title("Correlation Matrix Heatmap", fontsize=9)
     # using .tick_params to make the font of x and y axist to appropriate size
+    # FIXME: small window size is a problem
     ax_heatmap.tick_params(axis="x", labelsize=6)
     ax_heatmap.tick_params(axis="y", labelsize=6)
 
     # set the color fo plot to match the background color fo the window
     ax_heatmap.set_facecolor("#FAFAFA")
 
-    # Convert the heatmap to a Tkinter-compatible canvas
+    # now converting Matplotlib plot to Tkinter-compatible canvas using FigureCanvasTkAgg
     canvas_heatmap = FigureCanvasTkAgg(fig_heatmap, master=window)
     canvas_heatmap.draw()
 
@@ -157,14 +158,13 @@ def create_matplotlib_plots():
     canvas2 = FigureCanvasTkAgg(fig2, master=window)
     canvas2.draw()
 
+    # writing the exact dimensions of the rectangle for bar chart placement
     bar_x1, bar_y1, bar_x2, bar_y2 = 553.0, 149.0, 969.0, 332.0
-    bar_rect_width = bar_x2 - bar_x1
-    bar_rect_height = bar_y2 - bar_y1
+    bar_width = bar_x2 - bar_x1
+    bar_height = bar_y2 - bar_y1
 
-    bar_plot_widget = canvas2.get_tk_widget()
-    bar_plot_widget.place(
-        x=bar_x1, y=bar_y1, width=bar_rect_width, height=bar_rect_height
-    )
+    bar_widget = canvas2.get_tk_widget()
+    bar_widget.place(x=bar_x1, y=bar_y1, width=bar_width, height=bar_height)
     # *********************************pie chart avg based on seller******************************************************
     # Create a pie chart for the top 5 average prices based on sellers
     fig_pie, ax_pie = plt.subplots(figsize=(4, 4))
@@ -173,10 +173,13 @@ def create_matplotlib_plots():
     sizes = topAvgPriceBar.values
     labels = topAvgPriceBar.index
 
+    # this is where design the pie chart
+    # use autopct to set the percentage format to 1 decimal place
+    # Display percentage format with 1 decimal place
     ax_pie.pie(
         sizes,
         labels=labels,
-        autopct="%1.1f%%",  # Display percentage format with 1 decimal place
+        autopct="%1.1f%%",
         startangle=140,
         textprops={"fontsize": 5.2},
     )
@@ -191,18 +194,16 @@ def create_matplotlib_plots():
     canvas_pie.draw()
 
     # Get the dimensions of the rectangle for pie chart placement
-    pie_rect_x1, pie_rect_y1, pie_rect_x2, pie_rect_y2 = 318.0, 350.0, 541.0, 524.0
+    pie_x1, pie_y1, pie_x2, pie_y2 = 318.0, 350.0, 541.0, 524.0
 
     # Calculate the width and height of the pie chart rectangle
-    pie_rect_width = pie_rect_x2 - pie_rect_x1
-    pie_rect_height = pie_rect_y2 - pie_rect_y1
+    pie_width = pie_x2 - pie_x1
+    pie_height = pie_y2 - pie_y1
 
     # Now use the calculated width and height to
     # Embed the pie chart within the tkinter canvas
-    pie_chart_widget = canvas_pie.get_tk_widget()
-    pie_chart_widget.place(
-        x=pie_rect_x1, y=pie_rect_y1, width=pie_rect_width, height=pie_rect_height
-    )
+    pie_widget = canvas_pie.get_tk_widget()
+    pie_widget.place(x=pie_x1, y=pie_y1, width=pie_width, height=pie_height)
     # *********************************scatter plot price vs number of reviews**************************************
     fig_scatter, ax_scatter = plt.subplots(figsize=(1, 1))
     ax_scatter.scatter(df["item_price"], df["reviews"])  # Sample scatter plot
@@ -216,28 +217,25 @@ def create_matplotlib_plots():
     ax_scatter.tick_params(axis="x", labelsize=7)
     ax_scatter.tick_params(axis="y", labelsize=6)
 
-    # Convert Matplotlib scatter plot to Tkinter-compatible canvas
+    # now converting Matplotlib plot to Tkinter-compatible canvas using FigureCanvasTkAgg
     canvas_scatter = FigureCanvasTkAgg(fig_scatter, master=window)
     canvas_scatter.draw()
 
-    # Get the dimensions of the rectangle for scatter plot placement
-    scatter_rect_x1, scatter_rect_y1, scatter_rect_x2, scatter_rect_y2 = (
-        555.0,
-        348.0,
-        744.0,
-        522.0,
-    )
+    # get the dimensions of the rectangle for scatter plot placement
+    scatter_x1, scatter_y1, scatter_x2, scatter_y2 = 555.0, 348.0, 744.0, 522.0
 
-    # Calculate the width and height of the scatter plot rectangle
-    scatter_rect_width = scatter_rect_x2 - scatter_rect_x1
-    scatter_rect_height = scatter_rect_y2 - scatter_rect_y1
+    # calculate the width by subtracting the x-coordinates
+    scatter_width = scatter_x2 - scatter_x1
 
-    # Embed the scatter plot within the tkinter canvas (place it within the desired rectangle)
+    # using scatter_y2 - scatter_y1 to get the height of the rectangle
+    scatter_rect_height = scatter_y2 - scatter_y1
+
+    # embed the scatter plot within the tkinter canvas (place it within the desired rectangle)
     scatter_plot_widget = canvas_scatter.get_tk_widget()
     scatter_plot_widget.place(
-        x=scatter_rect_x1,
-        y=scatter_rect_y1,
-        width=scatter_rect_width,
+        x=scatter_x1,
+        y=scatter_y1,
+        width=scatter_width,
         height=scatter_rect_height,
     )
 
@@ -252,7 +250,7 @@ def create_matplotlib_plots():
     ax_boxplot.set_facecolor("#FAFAFA")  # Set plot background color
     ax_boxplot.tick_params(axis="x", labelsize=6)  # Set font size for x-axis ticks
     ax_boxplot.tick_params(axis="y", labelsize=8)  # Set font size for y-axis ticks
-    # Convert Matplotlib boxplot to Tkinter-compatible canvas
+    # now converting Matplotlib plot to Tkinter-compatible canvas using FigureCanvasTkAgg
     canvas_boxplot = FigureCanvasTkAgg(fig_boxplot, master=window)
     canvas_boxplot.draw()
 
@@ -282,36 +280,40 @@ def create_matplotlib_plots():
     ax_boxplot.set_xticklabels(seller_labels)
 
 
+# Sthis method displays the dataframe on the left side of the dashboard containing all the data
+# from the csv file retreived from the api call
 def display_dataframe(window, dataframe, x1, y1, x2, y2):
     frame = ttk.Frame(window)
     frame.place(x=x1, y=y1, width=(x2 - x1), height=(y2 - y1))
-
+    #  create a treeview widget
     tree = ttk.Treeview(frame)
-
-    # Get column names including the index
     columns = list(dataframe.columns)
-
-    # Rename the index column
     tree["columns"] = columns[1:]
-
-    # Set headings for columns and adjust column widths
+    # format the columns of the treeview
+    # this is where loop is used to create the columns of the table
+    # based on the columns in the dataframe
     for col in columns[1:]:
         tree.heading(col, text=col)
-        tree.column(col, width=52)  # Set the width as desired, e.g., 100 pixels
-    # Set width for the first column (index column)
-    tree.column("#0", width=0)  # Set the width as desired
-    # Insert data rows into the treeview
+        #setting the width of the columns to appropriate 
+        # size compared to the window size
+        tree.column(col, width=52)
+    # Set width for the first column to 0 because i didnt want to display the index values
+    tree.column("#0", width=0)
+    # Insert data rows into the treeview and exclude the index value in each row
     for idx, row in dataframe.iterrows():
-        values = list(row)[1:]  # Exclude the index value in each row
-        tree.insert("", "end", text=idx, values=values)  # Provide the index value here
+        values = list(row)[1:]  
+        # Provide the index value as the first value in each row
+        tree.insert("", "end", text=idx, values=values)  
 
     tree.pack(fill="both", expand=True)
 
 
 canvas.place(x=0, y=0)
+
+# window containing the dataframe on the left side of the dashboard
+canvas.create_rectangle(1.0, 47.0, 266.0, 552.0, fill="#F9F9F9", outline="")
 canvas.create_rectangle(2.0, 46.0, 267.0, 551.0, fill="#C9C9C9", outline="")
 
-canvas.create_rectangle(1.0, 47.0, 266.0, 552.0, fill="#F9F9F9", outline="")
 
 canvas.create_rectangle(0.0, 3.0, 999.0, 49.0, fill="#F0F0F0", outline="")
 
@@ -339,14 +341,14 @@ canvas.create_text(
 
 # all the rectangles created to create a dashboard
 # the boxed are created by creating a rectangle with a lighter color (#F9F9F9)
-#shadows boxes are manually created by creating a rectangle with a darker color (#C9C9C9)
+# shadows boxes are manually created by creating a rectangle with a darker color (#C9C9C9)
 
 
 canvas.create_rectangle(320.0, 352.0, 533.0, 526.0, fill="#C9C9C9", outline="")
 canvas.create_rectangle(557.0, 350.0, 746.0, 524.0, fill="#C9C9C9", outline="")
 canvas.create_rectangle(780.0, 349.0, 969.0, 523.0, fill="#C9C9C9", outline="")
 
-# top left box
+# top left box (heatmap)
 canvas.create_rectangle(316.0, 148.0, 539.0, 332.0, fill="#F9F9F9", outline="")
 canvas.create_rectangle(318.0, 150.0, 541.0, 334.0, fill="#C9C9C9", outline="")
 
@@ -370,9 +372,13 @@ canvas.create_rectangle(778.0, 347.0, 967.0, 521.0, fill="#F9F9F9", outline="")
 
 canvas.create_rectangle(555.0, 151.0, 971.0, 334.0, fill="#C2C2C2", outline="")
 
+# top right graph (bar chart)
 canvas.create_rectangle(553.0, 149.0, 969.0, 332.0, fill="#F9F9F9", outline="")
 
 button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
+# button which once pressed will run the method print_entry_content which then
+# will retreive the value from the input box and run the ploting method  and dataframe method
+# once again to update the plots and dataframe
 button_1 = Button(
     image=button_image_1,
     borderwidth=0,
@@ -385,7 +391,8 @@ window.resizable(False, False)
 create_matplotlib_plots()
 
 
-# Adjust the rectangle dimensions to fit your desired location
+# calling the display_dataframe function to display the dataframe on the left side of the dashboard
+# the values in the parameter represent the dimensions of the rectangle the table is placed in
 display_dataframe(window, df, 2.0, 47.0, 266.0, 552.0)
 
 window.mainloop()
