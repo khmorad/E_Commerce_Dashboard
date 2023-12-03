@@ -38,30 +38,26 @@ canvas.pack()
 
 
 # this works i just dont want to waste api calls
-##def print_entry_content():
-##    content = entry_1.get()  # Get the text from entry_1
-##
-##    # Assuming process_walmart_data_by_keyword takes the entered item name as an argument
-##    new_df = process_walmart_data_by_keyword(
-##        content
-##    )  # Get new data based on the item name
-##
-##    # Update the global DataFrame 'df' with the new data
-##    global df
-##    df = new_df
-##
-##    # Recreate the entire plotting
-##    create_matplotlib_plots()
-##
-##    print("Entry Content:", content)
-
-
 def print_entry_content():
     content = entry_1.get()  # Get the text from entry_1
+
+    # Assuming process_walmart_data_by_keyword takes the entered item name as an argument
+    new_df = process_walmart_data_by_keyword(
+        content
+    )  # Get new data based on the item name
+
+    # Update the global DataFrame 'df' with the new data
+    global df
+    df = new_df
+
+    # Recreate the entire plotting
+    create_matplotlib_plots()
+
     print("Entry Content:", content)
 
 
 def create_matplotlib_plots():
+    # ************************************heatmap correlation matrix****************************************
     selected_columns = ["item_price", "avg_rating", "reviews"]
     subset_df = df[selected_columns]
     cor_matrix = subset_df.corr()
@@ -89,11 +85,11 @@ def create_matplotlib_plots():
     canvas_heatmap = FigureCanvasTkAgg(fig_heatmap, master=window)
     canvas_heatmap.draw()
 
-    # Get the dimensions of the rectangle for heatmap placement
+    # Get the dimensions of the rectangle for heatmap placement ////change#1
     heatmap_rect_x1, heatmap_rect_y1, heatmap_rect_x2, heatmap_rect_y2 = (
         316.0,
         148.0,
-        529.0,
+        539.0,
         332.0,
     )
 
@@ -109,6 +105,8 @@ def create_matplotlib_plots():
         width=heatmap_rect_width,
         height=heatmap_rect_height,
     )
+
+    # *********************************bar chart avg based on seller******************************************************
     avgPriceBar = df.groupby("seller_name")["item_price"].mean()
     topAvgPriceBar = avgPriceBar.sort_values(ascending=False).head(10)
 
@@ -134,7 +132,7 @@ def create_matplotlib_plots():
         ind = sel.target.index
         if ind < len(topAvgPriceBar):
             seller_name = topAvgPriceBar.index[ind]
-            sel.annotation.set_text(f"{bars[ind].get_height()} - {seller_name}")
+            sel.annotation.set_text(f"${bars[ind].get_height():.2f} - {seller_name}")
             sel.annotation.get_bbox_patch().set(fc="white", alpha=1.0)
             sel.annotation.get_bbox_patch().set(edgecolor="black", linewidth=1)
 
@@ -157,7 +155,7 @@ def create_matplotlib_plots():
     bar_plot_widget.place(
         x=bar_rect_x1, y=bar_rect_y1, width=bar_rect_width, height=bar_rect_height
     )
-
+    # *********************************pie chart avg based on seller******************************************************
     # Create a pie chart for the top 5 average prices based on sellers
     fig_pie, ax_pie = plt.subplots(figsize=(4, 4))
 
@@ -182,7 +180,7 @@ def create_matplotlib_plots():
     canvas_pie.draw()
 
     # Get the dimensions of the rectangle for pie chart placement
-    pie_rect_x1, pie_rect_y1, pie_rect_x2, pie_rect_y2 = 318.0, 350.0, 531.0, 524.0
+    pie_rect_x1, pie_rect_y1, pie_rect_x2, pie_rect_y2 = 318.0, 350.0, 541.0, 524.0
 
     # Calculate the width and height of the pie chart rectangle
     pie_rect_width = pie_rect_x2 - pie_rect_x1
@@ -193,7 +191,7 @@ def create_matplotlib_plots():
     pie_chart_widget.place(
         x=pie_rect_x1, y=pie_rect_y1, width=pie_rect_width, height=pie_rect_height
     )
-    # Create a sample scatter plot
+    # *********************************scatter plot price vs number of reviews**************************************
     fig_scatter, ax_scatter = plt.subplots(figsize=(1, 1))
     ax_scatter.scatter(df["item_price"], df["reviews"])  # Sample scatter plot
     ax_scatter.set_xlabel("X-axis")
@@ -228,25 +226,17 @@ def create_matplotlib_plots():
         height=scatter_rect_height,
     )
 
-    top_sellers = df["seller_name"].value_counts().nlargest(3).index
+    top_sellers = df["seller_name"].value_counts().nlargest(2).index
     df_top_sellers = df[df["seller_name"].isin(top_sellers)]
 
     fig_boxplot, ax_boxplot = plt.subplots(figsize=(4, 4))
     sns.boxplot(x="seller_name", y="item_price", data=df_top_sellers, ax=ax_boxplot)
-    plt.title("Prices for Top 3 Sellers", fontsize=10)
+    plt.title("Prices for Top 2 Sellers", fontsize=10)
     ax_boxplot.set_xlabel("Seller Name")
     ax_boxplot.set_ylabel("Item Price")
     ax_boxplot.set_facecolor("#FAFAFA")  # Set plot background color
-
-    # Mapping company names to c1, c2, c3
-    company_mapping = {company: f"c{i + 1}" for i, company in enumerate(top_sellers)}
-
-    # Update x-axis labels to show c1, c2, c3 instead of actual seller names
-    seller_labels = [
-        company_mapping[seller] for seller in df_top_sellers["seller_name"].unique()
-    ]
-    ax_boxplot.set_xticklabels(seller_labels)
-
+    ax_boxplot.tick_params(axis="x", labelsize=6)  # Set font size for x-axis ticks
+    ax_boxplot.tick_params(axis="y", labelsize=8)  # Set font size for y-axis ticks
     # Convert Matplotlib boxplot to Tkinter-compatible canvas
     canvas_boxplot = FigureCanvasTkAgg(fig_boxplot, master=window)
     canvas_boxplot.draw()
@@ -272,41 +262,9 @@ def create_matplotlib_plots():
         height=boxplot_rect_height,
     )
 
-    # Mapping company names to c1, c2, c3
-    company_mapping = {company: f"c{i + 1}" for i, company in enumerate(top_sellers)}
-    ax_boxplot.tick_params(axis="x", labelsize=8)  # Set font size for x-axis ticks
-    ax_boxplot.tick_params(axis="y", labelsize=8)  # Set font size for y-axis ticks
-
-
-def bax_label(sel):
-    ind = sel.target.index
-    if ind < len(top_sellers):
-        if isinstance(
-            sel.artist, plt.Line2D
-        ):  # For Line2D objects (e.g., scatter plot)
-            x_data = sel.artist.get_xdata()
-            y_data = sel.artist.get_ydata()
-            x_val = x_data[ind]
-            y_val = y_data[ind]
-            sel.annotation.set_text(f"X: {x_val}, Y: {y_val}")
-        else:  # For BarContainer objects (e.g., bar plot)
-            seller_name = top_sellers[ind]
-            c_name = company_mapping[seller_name]
-            sel.annotation.set_text(
-                f"{topAvgPriceBar.values[ind]} - {c_name} ({seller_name})"
-            )
-        sel.annotation.get_bbox_patch().set(fc="white", alpha=1.0)
-        sel.annotation.get_bbox_patch().set(edgecolor="black", linewidth=1)
-
-        def on_leave(event):
-            sel.annotation.set_visible(False)
-            canvas_boxplot.draw()
-
-        canvas_boxplot.mpl_connect("axes_leave_event", on_leave)
-
-    bars = ax_boxplot.get_children()[1:]  # Get the bars in the boxplot
-
-    mplcursors.cursor(bars, hover=True).connect("add", bax_label)
+    # Set actual seller names as x-axis tick labels
+    seller_labels = df_top_sellers["seller_name"].unique()
+    ax_boxplot.set_xticklabels(seller_labels)
 
 
 def display_dataframe(window, dataframe, x1, y1, x2, y2):
@@ -363,7 +321,6 @@ canvas.create_text(
     font=("Righteous Regular", 22 * -1),
 )
 
-canvas.create_rectangle(318.0, 150.0, 531.0, 334.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(320.0, 352.0, 533.0, 526.0, fill="#C9C9C9", outline="")
 
@@ -371,21 +328,24 @@ canvas.create_rectangle(557.0, 350.0, 746.0, 524.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(780.0, 349.0, 969.0, 523.0, fill="#C9C9C9", outline="")
 
-canvas.create_rectangle(316.0, 148.0, 529.0, 332.0, fill="#F9F9F9", outline="")
+# top left box
+canvas.create_rectangle(316.0, 148.0, 539.0, 332.0, fill="#F9F9F9", outline="")
+canvas.create_rectangle(318.0, 150.0, 541.0, 334.0, fill="#C9C9C9", outline="")
 
-canvas.create_rectangle(320.0, 351.0, 533.0, 525.0, fill="#C9C9C9", outline="")
+# bottom left box
+
+canvas.create_rectangle(318.0, 350.0, 541.0, 524.0, fill="#F9F9F9", outline="")
+canvas.create_rectangle(320.0, 351.0, 543.0, 525.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(557.0, 349.0, 746.0, 523.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(780.0, 348.0, 969.0, 522.0, fill="#C9C9C9", outline="")
 
-canvas.create_rectangle(318.0, 350.0, 531.0, 524.0, fill="#F9F9F9", outline="")
 
 canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")
 
 canvas.create_rectangle(778.0, 347.0, 967.0, 521.0, fill="#F9F9F9", outline="")
 
-canvas.create_rectangle(318.0, 350.0, 531.0, 524.0, fill="#F9F9F9", outline="")
 
 canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")
 
