@@ -10,6 +10,7 @@ import pandas as pd
 from data import process_walmart_data_by_keyword
 import seaborn as sns
 
+# program starts with with existing csv file from previous search
 df = pd.read_csv("walmart_data.csv")
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame0")
@@ -54,7 +55,7 @@ def print_entry_content():
 
     # Recreate the entire plotting
     create_matplotlib_plots()
-
+    display_dataframe(window, df, 2.0, 47.0, 266.0, 552.0)
     print("Entry Content:", content)
 
 
@@ -145,6 +146,7 @@ def create_matplotlib_plots():
                 canvas2.draw()
 
             canvas2.mpl_connect("axes_leave_event", on_leave)
+
     # using mplcursors library so i can make the bar plot more interactive
     # .curson method and .add method so trigger the bar_label function onece the
     # mouse is hover over the bar
@@ -153,13 +155,13 @@ def create_matplotlib_plots():
     canvas2 = FigureCanvasTkAgg(fig2, master=window)
     canvas2.draw()
 
-    bar_rect_x1, bar_rect_y1, bar_rect_x2, bar_rect_y2 = 553.0, 149.0, 969.0, 332.0
-    bar_rect_width = bar_rect_x2 - bar_rect_x1
-    bar_rect_height = bar_rect_y2 - bar_rect_y1
+    bar_x1, bar_y1, bar_x2, bar_y2 = 553.0, 149.0, 969.0, 332.0
+    bar_rect_width = bar_x2 - bar_x1
+    bar_rect_height = bar_y2 - bar_y1
 
     bar_plot_widget = canvas2.get_tk_widget()
     bar_plot_widget.place(
-        x=bar_rect_x1, y=bar_rect_y1, width=bar_rect_width, height=bar_rect_height
+        x=bar_x1, y=bar_y1, width=bar_rect_width, height=bar_rect_height
     )
     # *********************************pie chart avg based on seller******************************************************
     # Create a pie chart for the top 5 average prices based on sellers
@@ -177,7 +179,7 @@ def create_matplotlib_plots():
         textprops={"fontsize": 5.2},
     )
     # Equal aspect ratio ensures that pie is drawn as a circle
-    ax_pie.axis("equal")  
+    ax_pie.axis("equal")
     # Set the title for the pie chart and change the font size to 10 so it would fit the
     # rectangle for the graph
     ax_pie.set_title("Avg Prices by Seller", fontsize=10)
