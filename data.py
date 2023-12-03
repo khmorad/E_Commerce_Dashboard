@@ -1,13 +1,11 @@
 import pandas as pd
 import requests
 
-# "207c3389f3msh11486cf94cb0b1dp16574bjsn187424d96ce9"  //key not working --reached monthly limit :(--
-
 
 def fetch_walmart_data_by_keyword(keyword):
     url = "https://axesso-walmart-data-service.p.rapidapi.com/wlm/walmart-search-by-keyword"
     headers = {
-        "X-RapidAPI-Key": "Api key",
+        "X-RapidAPI-Key": "API_KEY",
         "X-RapidAPI-Host": "axesso-walmart-data-service.p.rapidapi.com",
     }
     querystring = {"keyword": keyword, "page": "1", "sortBy": "best_match"}
@@ -50,6 +48,10 @@ def extract_data(json_items):
                 item_data["avg_rating"].append(item["rating"]["averageRating"])
                 item_data["reviews"].append(item["rating"]["numberOfReviews"])
                 item_data["item_name"].append(item["name"])
+            # exception raised when some data is missing
+            # some items in the json file missed some data for ex
+            # some missed item price or average rating
+            # exception had to be made so it filtered those items
             except KeyError:
                 print("Some data is missing")
     return pd.DataFrame(item_data)
