@@ -42,9 +42,11 @@ canvas.pack()
 # which will run the create_matplotlib_plots function again to update the plots
 # this works i just dont want to waste api calls
 def print_entry_content():
-    content = entry_1.get()  # Get the text from entry_1
+    # Get the text from entry_1 input box
+    content = entry_1.get()
 
-    # Assuming process_walmart_data_by_keyword takes the entered item name as an argument
+    # creates a new datafram variable which first gets the searched keyword from the api
+    # based on the searched keyword
     new_df = process_walmart_data_by_keyword(
         content
     )  # Get new data based on the item name
@@ -55,6 +57,7 @@ def print_entry_content():
 
     # Recreate the entire plotting
     create_matplotlib_plots()
+    # also update the datarame table on located on the left side of the dashboard
     display_dataframe(window, df, 2.0, 47.0, 266.0, 552.0)
     print("Entry Content:", content)
 
@@ -81,8 +84,7 @@ def create_matplotlib_plots():
     ax_heatmap.tick_params(axis="x", labelsize=6)
     ax_heatmap.tick_params(axis="y", labelsize=6)
 
-    # Adjust layout to give more space for labels
-
+    # set the color fo plot to match the background color fo the window
     ax_heatmap.set_facecolor("#FAFAFA")
 
     # Convert the heatmap to a Tkinter-compatible canvas
@@ -336,10 +338,12 @@ canvas.create_text(
 
 
 # all the rectangles created to create a dashboard
+# the boxed are created by creating a rectangle with a lighter color (#F9F9F9)
+#shadows boxes are manually created by creating a rectangle with a darker color (#C9C9C9)
+
+
 canvas.create_rectangle(320.0, 352.0, 533.0, 526.0, fill="#C9C9C9", outline="")
-
 canvas.create_rectangle(557.0, 350.0, 746.0, 524.0, fill="#C9C9C9", outline="")
-
 canvas.create_rectangle(780.0, 349.0, 969.0, 523.0, fill="#C9C9C9", outline="")
 
 # top left box
@@ -347,7 +351,6 @@ canvas.create_rectangle(316.0, 148.0, 539.0, 332.0, fill="#F9F9F9", outline="")
 canvas.create_rectangle(318.0, 150.0, 541.0, 334.0, fill="#C9C9C9", outline="")
 
 # bottom left box
-
 canvas.create_rectangle(318.0, 350.0, 541.0, 524.0, fill="#F9F9F9", outline="")
 canvas.create_rectangle(320.0, 351.0, 543.0, 525.0, fill="#C9C9C9", outline="")
 
