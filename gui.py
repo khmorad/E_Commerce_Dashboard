@@ -247,9 +247,10 @@ def create_matplotlib_plots():
     plt.title("Prices for Top 2 Sellers", fontsize=10)
     ax_boxplot.set_xlabel("Seller Name")
     ax_boxplot.set_ylabel("Item Price")
-    ax_boxplot.set_facecolor("#FAFAFA")  # Set plot background color
-    ax_boxplot.tick_params(axis="x", labelsize=6)  # Set font size for x-axis ticks
-    ax_boxplot.tick_params(axis="y", labelsize=8)  # Set font size for y-axis ticks
+    ax_boxplot.set_facecolor("#FAFAFA")
+    # change the font size for both x and y axis to appropriate size
+    ax_boxplot.tick_params(axis="x", labelsize=6)
+    ax_boxplot.tick_params(axis="y", labelsize=8)
     # now converting Matplotlib plot to Tkinter-compatible canvas using FigureCanvasTkAgg
     canvas_boxplot = FigureCanvasTkAgg(fig_boxplot, master=window)
     canvas_boxplot.draw()
@@ -294,16 +295,16 @@ def display_dataframe(window, dataframe, x1, y1, x2, y2):
     # based on the columns in the dataframe
     for col in columns[1:]:
         tree.heading(col, text=col)
-        #setting the width of the columns to appropriate 
+        # setting the width of the columns to appropriate
         # size compared to the window size
         tree.column(col, width=52)
     # Set width for the first column to 0 because i didnt want to display the index values
     tree.column("#0", width=0)
     # Insert data rows into the treeview and exclude the index value in each row
     for idx, row in dataframe.iterrows():
-        values = list(row)[1:]  
+        values = list(row)[1:]
         # Provide the index value as the first value in each row
-        tree.insert("", "end", text=idx, values=values)  
+        tree.insert("", "end", text=idx, values=values)
 
     tree.pack(fill="both", expand=True)
 
@@ -329,6 +330,8 @@ canvas.create_rectangle(9.0, 4.0, 58.0, 43.0, fill="#FFEBCD", outline="")
 image_image_1 = PhotoImage(file=relative_to_assets("image_1.png"))
 image_1 = canvas.create_image(33.0, 23.0, image=image_image_1)
 
+
+# the title of the dashboard
 canvas.create_text(
     72.0,
     11.0,
@@ -356,13 +359,10 @@ canvas.create_rectangle(318.0, 150.0, 541.0, 334.0, fill="#C9C9C9", outline="")
 canvas.create_rectangle(318.0, 350.0, 541.0, 524.0, fill="#F9F9F9", outline="")
 canvas.create_rectangle(320.0, 351.0, 543.0, 525.0, fill="#C9C9C9", outline="")
 
+canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")
 canvas.create_rectangle(557.0, 349.0, 746.0, 523.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(780.0, 348.0, 969.0, 522.0, fill="#C9C9C9", outline="")
-
-
-canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")
-
 canvas.create_rectangle(778.0, 347.0, 967.0, 521.0, fill="#F9F9F9", outline="")
 
 
@@ -370,10 +370,10 @@ canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")
 
 canvas.create_rectangle(778.0, 347.0, 967.0, 521.0, fill="#F9F9F9", outline="")
 
-canvas.create_rectangle(555.0, 151.0, 971.0, 334.0, fill="#C2C2C2", outline="")
 
 # top right graph (bar chart)
 canvas.create_rectangle(553.0, 149.0, 969.0, 332.0, fill="#F9F9F9", outline="")
+canvas.create_rectangle(555.0, 151.0, 971.0, 334.0, fill="#C2C2C2", outline="")
 
 button_image_1 = PhotoImage(file=relative_to_assets("button_1.png"))
 # button which once pressed will run the method print_entry_content which then
