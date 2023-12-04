@@ -5,7 +5,7 @@ import requests
 def fetch_walmart_data_by_keyword(keyword):
     url = "https://axesso-walmart-data-service.p.rapidapi.com/wlm/walmart-search-by-keyword"
     headers = {
-        "X-RapidAPI-Key": "Api-Key",
+        "X-RapidAPI-Key": "dcd7cbe2demsh2762fda9960c05cp1fcc84jsnb21bf36130d9",
         "X-RapidAPI-Host": "axesso-walmart-data-service.p.rapidapi.com",
     }
     querystring = {"keyword": keyword, "page": "1", "sortBy": "best_match"}
