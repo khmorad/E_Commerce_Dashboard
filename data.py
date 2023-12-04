@@ -2,10 +2,13 @@ import pandas as pd
 import requests
 
 
+###########################Important###################
+# ConnectionError exception might accure during execution
+# if accured please press search one more time and wait for few seconds (api problem)
 def fetch_walmart_data_by_keyword(keyword):
     url = "https://axesso-walmart-data-service.p.rapidapi.com/wlm/walmart-search-by-keyword"
     headers = {
-        "X-RapidAPI-Key": "API_KEY",
+        "X-RapidAPI-Key": "Api key",
         "X-RapidAPI-Host": "axesso-walmart-data-service.p.rapidapi.com",
     }
     querystring = {"keyword": keyword, "page": "1", "sortBy": "best_match"}
@@ -26,7 +29,7 @@ def extract_data(json_items):
     ]
     # defining a dictionary where each value contains
     # empty list
-    item_data = {
+    data_dic = {
         "id": [],
         "seller_name": [],
         "item_price": [],
@@ -40,21 +43,21 @@ def extract_data(json_items):
     for stack in data:
         for item in stack["items"]:
             try:
-                item_data["id"].append(item["usItemId"])
-                item_data["seller_name"].append(item["sellerName"])
-                item_data["item_price"].append(item["price"])
-                item_data["Item_line_price"].append(item["priceInfo"]["linePrice"])
-                item_data["availability"].append(not item["isOutOfStock"])
-                item_data["avg_rating"].append(item["rating"]["averageRating"])
-                item_data["reviews"].append(item["rating"]["numberOfReviews"])
-                item_data["item_name"].append(item["name"])
+                data_dic["id"].append(item["usItemId"])
+                data_dic["seller_name"].append(item["sellerName"])
+                data_dic["item_price"].append(item["price"])
+                data_dic["Item_line_price"].append(item["priceInfo"]["linePrice"])
+                data_dic["availability"].append(not item["isOutOfStock"])
+                data_dic["avg_rating"].append(item["rating"]["averageRating"])
+                data_dic["reviews"].append(item["rating"]["numberOfReviews"])
+                data_dic["item_name"].append(item["name"])
             # exception raised when some data is missing
             # some items in the json file missed some data for ex
             # some missed item price or average rating
             # exception had to be made so it filtered those items
             except KeyError:
                 print("Some data is missing")
-    return pd.DataFrame(item_data)
+    return pd.DataFrame(data_dic)
 
 
 # this is the main function which uses the other function in this file which is being used in gui.py
