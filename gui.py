@@ -77,6 +77,7 @@ def create_matplotlib_plots():
         fmt=".2f",
         linewidths=0.5,
         ax=ax_heatmap,
+        # this size correlated to the values inside the heatmap
         annot_kws={"size": 7},
     )
     plt.title("Correlation Matrix Heatmap", fontsize=9)
