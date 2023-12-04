@@ -11,6 +11,7 @@ from data import process_walmart_data_by_keyword
 import seaborn as sns
 
 # program starts with with existing csv file from previous search
+# currently holding the data for Books item
 df = pd.read_csv("walmart_data.csv")
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame0")
@@ -43,7 +44,7 @@ canvas.pack()
 # this works i just dont want to waste api calls
 def print_entry_content():
     # Get the text from entry_1 input box
-    content = entry_1.get()
+    content = input_box.get()
 
     # creates a new datafram variable which first gets the searched keyword from the api
     # based on the searched keyword
@@ -51,7 +52,8 @@ def print_entry_content():
         content
     )  # Get new data based on the item name
 
-    # Update the global DataFrame 'df' with the new data
+    # update the global DataFrame 'df' with the new data
+    # because the dataframe is being used in other functions
     global df
     df = new_df
 
@@ -68,7 +70,7 @@ def create_matplotlib_plots():
     subset_df = df[selected_columns]
     cor_matrix = subset_df.corr()
 
-    # Create a heatmap of the correlation matrix
+    # heatmap of the correlation matrix
     fig_heatmap, ax_heatmap = plt.subplots(figsize=(4, 4))
     sns.heatmap(
         cor_matrix,
@@ -77,6 +79,7 @@ def create_matplotlib_plots():
         fmt=".2f",
         linewidths=0.5,
         ax=ax_heatmap,
+        # this size correlated to the values inside the heatmap
         annot_kws={"size": 7},
     )
     plt.title("Correlation Matrix Heatmap", fontsize=9)
@@ -92,25 +95,24 @@ def create_matplotlib_plots():
     canvas_heatmap = FigureCanvasTkAgg(fig_heatmap, master=window)
     canvas_heatmap.draw()
 
-    # Get the dimensions of the rectangle for heatmap placement ////change#1
-    heatmap_rect_x1, heatmap_rect_y1, heatmap_rect_x2, heatmap_rect_y2 = (
-        316.0,
-        148.0,
-        539.0,
-        332.0,
-    )
+    # Get the dimensions of the rectangle where the heap map will get located in
+    heatmap_x1 = 316.0
+    heatmap_y1 = 148.0
+    heatmap_x2 = 539.0
+    heatmap_y2 = 332.0
 
-    # Calculate the width and height of the heatmap rectangle
-    heatmap_rect_width = heatmap_rect_x2 - heatmap_rect_x1
-    heatmap_rect_height = heatmap_rect_y2 - heatmap_rect_y1
+    # width of the heatmap rectangle
+    heatmap_width = heatmap_x2 - heatmap_x1
+    # height of the heatmap rectangle
+    heatmap_height = heatmap_y2 - heatmap_y1
 
-    # Embed the heatmap within the tkinter canvas (place it within the desired rectangle)
+    # place heatmap within the tkinter canvas (place it within the desired rectangle)
     heatmap_widget = canvas_heatmap.get_tk_widget()
     heatmap_widget.place(
-        x=heatmap_rect_x1,
-        y=heatmap_rect_y1,
-        width=heatmap_rect_width,
-        height=heatmap_rect_height,
+        x=heatmap_x1,
+        y=heatmap_y1,
+        width=heatmap_width,
+        height=heatmap_height,
     )
 
     # *********************************bar chart avg based on seller******************************************************
@@ -134,7 +136,7 @@ def create_matplotlib_plots():
     ax2.set_facecolor("#FAFAFA")
     # using .tick_params to make the font of x and y axist to appropriate size
     ax2.tick_params(axis="x", labelsize=8)
-    ax2.tick_params(axis="y", labelsize=8)
+    ax2.tick_params(axis="y", labelsize=6)
 
     def bar_label(sel):
         ind = sel.target.index
@@ -151,7 +153,7 @@ def create_matplotlib_plots():
             canvas2.mpl_connect("axes_leave_event", on_leave)
 
     # using mplcursors library so i can make the bar plot more interactive
-    # .curson method and .add method so trigger the bar_label function onece the
+    # .cursor method and .add method so trigger the bar_label function onece the
     # mouse is hover over the bar
     mplcursors.cursor(bars, hover=True).connect("add", bar_label)
 
@@ -159,14 +161,20 @@ def create_matplotlib_plots():
     canvas2.draw()
 
     # writing the exact dimensions of the rectangle for bar chart placement
-    bar_x1, bar_y1, bar_x2, bar_y2 = 553.0, 149.0, 969.0, 332.0
+    bar_x1 = 553.0
+    bar_y1 = 149.0
+    bar_x2 = 969.0
+    bar_y2 = 332.0
+
+    # calc the bar width
     bar_width = bar_x2 - bar_x1
+    # calc the bar height
     bar_height = bar_y2 - bar_y1
 
-    bar_widget = canvas2.get_tk_widget()
-    bar_widget.place(x=bar_x1, y=bar_y1, width=bar_width, height=bar_height)
+    bar_graph = canvas2.get_tk_widget()
+    bar_graph.place(x=bar_x1, y=bar_y1, width=bar_width, height=bar_height)
     # *********************************pie chart avg based on seller******************************************************
-    # Create a pie chart for the top 5 average prices based on sellers
+    # create a pie chart for the top 5 average prices based on sellers
     fig_pie, ax_pie = plt.subplots(figsize=(4, 4))
 
     # Prepare data for the pie chart
@@ -175,7 +183,7 @@ def create_matplotlib_plots():
 
     # this is where design the pie chart
     # use autopct to set the percentage format to 1 decimal place
-    # Display percentage format with 1 decimal place
+    # display percentage format with 1 decimal place
     ax_pie.pie(
         sizes,
         labels=labels,
@@ -183,7 +191,7 @@ def create_matplotlib_plots():
         startangle=140,
         textprops={"fontsize": 5.2},
     )
-    # Equal aspect ratio ensures that pie is drawn as a circle
+    # equal aspect ratio ensures that pie is drawn as a circle
     ax_pie.axis("equal")
     # Set the title for the pie chart and change the font size to 10 so it would fit the
     # rectangle for the graph
@@ -194,13 +202,17 @@ def create_matplotlib_plots():
     canvas_pie.draw()
 
     # Get the dimensions of the rectangle for pie chart placement
-    pie_x1, pie_y1, pie_x2, pie_y2 = 318.0, 350.0, 541.0, 524.0
+    pie_x1 = 318.0
+    pie_y1 = 350.0
+    pie_x2 = 541.0
+    pie_y2 = 524.0
 
-    # Calculate the width and height of the pie chart rectangle
+    # calculate the of the pie chart rectangle
     pie_width = pie_x2 - pie_x1
+    # calcualte height of the pie chart rectangle
     pie_height = pie_y2 - pie_y1
 
-    # Now use the calculated width and height to
+    # now use the calculated width and height to
     # Embed the pie chart within the tkinter canvas
     pie_widget = canvas_pie.get_tk_widget()
     pie_widget.place(x=pie_x1, y=pie_y1, width=pie_width, height=pie_height)
@@ -222,7 +234,10 @@ def create_matplotlib_plots():
     canvas_scatter.draw()
 
     # get the dimensions of the rectangle for scatter plot placement
-    scatter_x1, scatter_y1, scatter_x2, scatter_y2 = 555.0, 348.0, 744.0, 522.0
+    scatter_x1 = 555.0
+    scatter_y1 = 348.0
+    scatter_x2 = 744.0
+    scatter_y2 = 522.0
 
     # calculate the width by subtracting the x-coordinates
     scatter_width = scatter_x2 - scatter_x1
@@ -256,22 +271,21 @@ def create_matplotlib_plots():
     canvas_boxplot.draw()
 
     # Get the dimensions of the rectangle for boxplot placement
-    boxplot_rect_x1, boxplot_rect_y1, boxplot_rect_x2, boxplot_rect_y2 = (
-        778.0,
-        347.0,
-        967.0,
-        521.0,
-    )
+    boxplot_x1 = 778.0
+    boxplot_y1 = 347.0
+    boxplot_x2 = 967.0
+    boxplot_y2 = 521.0
 
-    # Calculate the width and height of the boxplot rectangle
-    boxplot_rect_width = boxplot_rect_x2 - boxplot_rect_x1
-    boxplot_rect_height = boxplot_rect_y2 - boxplot_rect_y1
+    # Calculate the width  of the boxplot rectangle
+    boxplot_rect_width = boxplot_x2 - boxplot_x1
+    # calculate height for boxplot rectangle
+    boxplot_rect_height = boxplot_y2 - boxplot_y1
 
     # Embed the boxplot within the tkinter canvas (place it within the desired rectangle)
     boxplot_widget = canvas_boxplot.get_tk_widget()
     boxplot_widget.place(
-        x=boxplot_rect_x1,
-        y=boxplot_rect_y1,
+        x=boxplot_x1,
+        y=boxplot_y1,
         width=boxplot_rect_width,
         height=boxplot_rect_height,
     )
@@ -318,10 +332,11 @@ canvas.create_rectangle(2.0, 46.0, 267.0, 551.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(0.0, 3.0, 999.0, 49.0, fill="#F0F0F0", outline="")
 
+# use the image included in the assets folder
 entry_image_1 = PhotoImage(file=relative_to_assets("entry_1.png"))
 entry_bg_1 = canvas.create_image(543.5, 98.5, image=entry_image_1)
-entry_1 = Entry(bd=0, bg="#D1F1EB", fg="#000716", highlightthickness=0)
-entry_1.place(x=319.0, y=83.0, width=449.0, height=29.0)
+input_box = Entry(bd=0, bg="#D1F1EB", fg="#000716", highlightthickness=0)
+input_box.place(x=319.0, y=83.0, width=449.0, height=29.0)
 
 canvas.create_rectangle(0.0, 0.0, 999.0, 46.0, fill="#38BBD8", outline="")
 
@@ -353,10 +368,12 @@ canvas.create_rectangle(780.0, 349.0, 969.0, 523.0, fill="#C9C9C9", outline="")
 
 # top left box (heatmap)
 canvas.create_rectangle(316.0, 148.0, 539.0, 332.0, fill="#F9F9F9", outline="")
+
 canvas.create_rectangle(318.0, 150.0, 541.0, 334.0, fill="#C9C9C9", outline="")
 
-# bottom left box
+# place bottom left box of dashboard (pie chart)
 canvas.create_rectangle(318.0, 350.0, 541.0, 524.0, fill="#F9F9F9", outline="")
+
 canvas.create_rectangle(320.0, 351.0, 543.0, 525.0, fill="#C9C9C9", outline="")
 
 canvas.create_rectangle(555.0, 348.0, 744.0, 522.0, fill="#F9F9F9", outline="")

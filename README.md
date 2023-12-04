@@ -33,13 +33,21 @@ In the expansive realm of online commerce, a wealth of valuable information is r
 | 10/25/2023 | Complete Project Proposal                          | Complete     |
 | 10/31/2023 | Import IPO data into Google Colab                  | Complete     |
 | 10/31/2023 | Determine focus data points                        | Complete     |
-| 11/4/2023  | Conduct simple statistical analysis                | Complete     |
-| 11/13/2023 | Create visualizations with Matplotlib, Seaborn     | Complete     |
-| 11/18/2023 | Implement dashboard software                       | Complete     |
-| 11/21/2023 | Create presentation slides                         | Complete     |
+| 11/14/2023 | Conduct simple statistical analysis                | Complete     |
+| 11/24/2023 | Create visualizations with Matplotlib, Seaborn     | Complete     |
+| 11/30/2023 | Implement dashboard software                       | Complete     |
+| 12/3/2023  | Create presentation slides                         | Complete     |
 
 
 
+
+
+### Setup
+
+1. once cloned run this command in the root directory of this project:
+
+    ```bash
+    python gui.py
 ---
 
 This project is licensed under the [MIT License](LICENSE).
