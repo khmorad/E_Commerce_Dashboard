@@ -42,12 +42,17 @@ In the expansive realm of online commerce, a wealth of valuable information is r
 
 
 
-### Setup
 
-1. once cloned run this command in the root directory of this project:
+3. Install the required dependencies by running the following command:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. After installing the dependencies, execute the following command to start the application:
 
     ```bash
     python gui.py
----
+    ```
 
 This project is licensed under the [MIT License](LICENSE).
