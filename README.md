@@ -7,7 +7,8 @@
 
 ## Preview
 
-![Preview Image](https://cdn.discordapp.com/attachments/1015033055775305831/1180727491804024862/image.png?ex=657e792a&is=656c042a&hm=a9c27bf5bf0dde2bf3afe334bf198838d38075723c03016aca35f6920b3fe0d6&)
+![Dashboard Image](https://raw.githubusercontent.com/khmorad/Yar-portfolio/main/src/assets/images/DASHBOARD.png)
+
 
 
 ## Project Vision
